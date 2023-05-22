@@ -1,6 +1,5 @@
 package com.socialnetwork.demo.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +23,7 @@ public class SecurityConfig {
         .csrf()
         .disable()
         .authorizeHttpRequests()
-        .requestMatchers("/api/auth/**")
+        .requestMatchers("/api/**")
         .permitAll()
         .anyRequest()
         .authenticated()
