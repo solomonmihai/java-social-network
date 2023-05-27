@@ -1,7 +1,7 @@
-package com.socialnetwork.demo.account;
+package com.socialnetwork.demo.controllers.account;
 
-import com.socialnetwork.demo.user.User;
-import com.socialnetwork.demo.user.UserRepository;
+import com.socialnetwork.demo.dto.AccountDto;
+import com.socialnetwork.demo.services.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
   public final AccountService accountService;
   @GetMapping("/me")
-  public User getUserData() {
+  public AccountDto getUserData() {
     return accountService.getUserData();
   }
 }
