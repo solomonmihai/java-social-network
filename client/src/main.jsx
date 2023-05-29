@@ -4,6 +4,12 @@ import App from "./App.jsx";
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
+import dayjs from "dayjs";
+
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
+
 const config = {
   initialColorMode: "dark",
   useSystemColorMode: false,

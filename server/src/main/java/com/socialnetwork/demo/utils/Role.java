@@ -1,4 +1,4 @@
-package com.socialnetwork.demo.user;
+package com.socialnetwork.demo.utils;
 
 public enum Role {
   USER,

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link as ReactRouterLink } from "react-router-dom";
 import { Box, Input, FormControl, FormLabel, Text, Button, Link } from "@chakra-ui/react";
 
-import AuthStore from "../stores/auth";
+import PasswordInput from "../components/PasswordInput";
 
+import AuthStore from "../stores/auth";
 import { login } from "../services";
-import { useEffect } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -35,6 +35,7 @@ export default function Login() {
   }
 
   function onSubmit() {
+    // TODO: add event for incorrect password
     // TODO: maybe move this logic to services
     login(data)
       .then((res) => {
@@ -44,7 +45,6 @@ export default function Login() {
 
         navigate("/");
       })
-      // TODO: check validation errors
       .catch((err) => {
         console.log(err.response.data);
       });
@@ -62,7 +62,7 @@ export default function Login() {
         </FormControl>
         <FormControl my="4">
           <FormLabel>Password</FormLabel>
-          <Input placeholder="Password" type="password" value={data.lastName} name="password" onChange={handleChange} />
+          <PasswordInput placeholder="password" value={data.password} name="password" onChange={handleChange} />
         </FormControl>
         <Button w="full" colorScheme="blue" onClick={onSubmit}>
           Login

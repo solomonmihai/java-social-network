@@ -1,21 +1,35 @@
-package com.socialnetwork.demo.account;
+package com.socialnetwork.demo.services;
 
-import com.socialnetwork.demo.user.User;
-import com.socialnetwork.demo.user.UserRepository;
+import com.socialnetwork.demo.dto.AccountDto;
+import com.socialnetwork.demo.exceptions.NotFoundException;
+import com.socialnetwork.demo.models.User;
+import com.socialnetwork.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
-public class AccountService {
+public class AccountService extends AuthenticatedService {
 
   private final UserRepository userRepository;
-  public User getUserData() {
-    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+  private final ModelMapper modelMapper;
+  public AccountDto getOwnData() {
+    User user = getAuthenticatedUser();
 
-    User user = userRepository.findByEmail(email).orElseThrow();
+    return modelMapper.map(user, AccountDto.class);
+  }
 
-    return user;
+  public AccountDto getUserData(Integer userId) {
+    Optional<User> optionalUser = userRepository.findById(userId);
+
+    if (optionalUser.isEmpty()) {
+      throw new NotFoundException("user not found");
+    }
+
+    return modelMapper.map(optionalUser.get(), AccountDto.class);
   }
 }

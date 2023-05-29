@@ -1,5 +1,6 @@
-package com.socialnetwork.demo.user;
+package com.socialnetwork.demo.repositories;
 
+import com.socialnetwork.demo.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

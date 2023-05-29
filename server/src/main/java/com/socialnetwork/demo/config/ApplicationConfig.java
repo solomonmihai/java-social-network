@@ -1,6 +1,6 @@
 package com.socialnetwork.demo.config;
 
-import com.socialnetwork.demo.user.UserRepository;
+import com.socialnetwork.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

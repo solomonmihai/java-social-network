@@ -1,9 +1,9 @@
 package com.socialnetwork.demo.auth;
 
 import com.socialnetwork.demo.config.JwtService;
-import com.socialnetwork.demo.user.Role;
-import com.socialnetwork.demo.user.User;
-import com.socialnetwork.demo.user.UserRepository;
+import com.socialnetwork.demo.utils.Role;
+import com.socialnetwork.demo.models.User;
+import com.socialnetwork.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

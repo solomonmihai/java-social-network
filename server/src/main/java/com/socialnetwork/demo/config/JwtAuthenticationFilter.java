@@ -30,6 +30,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain
   ) throws ServletException, IOException {
+
+    if (request.getServletPath().contains("/api/v1/auth")) {
+      filterChain.doFilter(request, response);
+      return;
+    }
+
     final String authHeader = request.getHeader("Authorization");
     final String token;
     final String email;
@@ -44,20 +50,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
-      /*
-       note: this function check is token is valid and takes parameters
-       the token and the userDetails that were extracted from the token
-       why not only pass the token as parameter ??
-      */
       if (jwtService.isTokenValid(token, userDetails)) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-            userDetails, null, userDetails.getAuthorities()
+            userDetails,
+            null,
+            userDetails.getAuthorities()
         );
-        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        authToken.setDetails(
+            new WebAuthenticationDetailsSource().buildDetails(request)
+        );
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
     }
-
     filterChain.doFilter(request, response);
   }
 }

@@ -1,5 +1,6 @@
-package com.socialnetwork.demo.user;
+package com.socialnetwork.demo.models;
 
+import com.socialnetwork.demo.utils.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,10 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "_user")
+@Table(name = "users")
 public class User implements UserDetails {
   @Id
-  @GeneratedValue
+  @GeneratedValue()
   private Integer id;
   private String firstName;
   private String lastName;
